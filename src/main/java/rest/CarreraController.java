@@ -1,17 +1,20 @@
 package rest;
 
 import java.util.List;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import model.Carrera;
+import model.Estudiante;
 import model.dto.CarreraEstudiantes;
 import repository.CarreraRepository;
 import repository.CarreraRepositoryImpl;
+import rest.response.CarrerasEstudiantesListResponse;
 
 @Path("/carreras")
 public class CarreraController {
+
 
   /**
    * Punto 2f.
@@ -23,11 +26,10 @@ public class CarreraController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getListaCarrera() {
     try {
-      CarreraRepository carreraRepository = new CarreraRepositoryImpl();
-      List<CarreraEstudiantes> carreraEstudiantesList = carreraRepository.findAllSortByInscriptos();
+      List<CarreraEstudiantes> carreraList = LectorCicloDeVida.carreraRepository.findAllSortByInscriptos();
       return Response
           .status(Response.Status.OK)
-          .entity(carreraEstudiantesList)
+          .entity(carreraList)
           .build();
     } catch (Exception e) {
       String error = "Error al Obtener lista de Carreras.";
@@ -35,6 +37,27 @@ public class CarreraController {
           .serverError()
           .entity(error)
           .build();
+    }
+
+  }
+
+  @POST
+  @Path("/addCarrera")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response saveEstudiante(Carrera carrera) {
+    try {
+      LectorCicloDeVida.carreraRepository.save(carrera);
+      return Response
+              .status(Response.Status.OK)
+              .entity(carrera)
+              .build();
+    } catch (Exception e) {
+      String error = "Error al insertar Estudiante";
+      return Response
+              .serverError()
+              .entity(error)
+              .build();
     }
   }
 

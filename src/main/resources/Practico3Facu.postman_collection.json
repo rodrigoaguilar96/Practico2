@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5cc1ab17-a244-437f-adca-899c83b4fb0f",
+		"_postman_id": "d4014512-7108-46fb-bc30-1ad8d9e382e4",
 		"name": "Practico3Facu",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"libretaUniversitaria\": \"35\",\n\n    \"nombre\": \"testNombre\",\n\n    \"apelldio\": \"testApellido\",\n\n    \"edad\": 25,\n\n    \"documento\": 2005,\n\n    \"genero\": \"femenino\",\n\n    \"ciudad\": \"tandil\"\n}",
+					"raw": "{\n    \"libretaUniversitaria\": \"38\",\n\n    \"nombre\": \"testNombre\",\n\n    \"apelldio\": \"testApellido\",\n\n    \"edad\": 25,\n\n    \"documento\": 2005,\n\n    \"genero\": \"femenino\",\n\n    \"ciudad\": \"Tandil\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,12 +20,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8998/Practico3/rest/estudiantes/addEstudiante",
+					"raw": "http://localhost:8080/Practico3/rest/estudiantes/addEstudiante",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8998",
+					"port": "8080",
 					"path": [
 						"Practico3",
 						"rest",
@@ -38,13 +38,13 @@
 			"response": []
 		},
 		{
-			"name": "2b matricularEstudiante",
+			"name": "2aa carreras/addCarrera",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"estudiante\": {\n        \"libretaUniversitaria\": \"35\",\n\n        \"nombre\": \"testNombre\",\n\n        \"apelldio\": \"testApellido\",\n\n        \"edad\": 25,\n\n        \"documento\": 2005,\n\n        \"genero\": \"femenino\",\n\n        \"ciudad\": \"tandil\"\n    },\n    \"carrera\": {\n        \"id\": 2,\n\n        \"nombre\": \"TUDAI\"\n    }\n}",
+					"raw": "{\r\n        \"id\": 1,\r\n\r\n        \"nombre\": \"Sistemas\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -52,12 +52,43 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8998/Practico3/rest/estudiantes/matricularEstudiante",
+					"raw": "http://localhost:8080/Practico3/rest/carreras/addCarrera",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8998",
+					"port": "8080",
+					"path": [
+						"Practico3",
+						"rest",
+						"carreras",
+						"addCarrera"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2b matricularEstudiante",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"estudiante\": {\n        \"libretaUniversitaria\": \"38\",\n\n        \"nombre\": \"testNombre\",\n\n        \"apelldio\": \"testApellido\",\n\n        \"edad\": 25,\n\n        \"documento\": 2005,\n\n        \"genero\": \"femenino\",\n\n        \"ciudad\": \"tandil\"\n    },\n    \"carrera\": {\n        \"id\": 1,\n\n        \"nombre\": \"Sistemas\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Practico3/rest/estudiantes/matricularEstudiante",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
 					"path": [
 						"Practico3",
 						"rest",
@@ -74,12 +105,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8998/Practico3/rest/estudiantes/listaEstudiantes",
+					"raw": "http://localhost:8080/Practico3/rest/estudiantes/listaEstudiantes",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8998",
+					"port": "8080",
 					"path": [
 						"Practico3",
 						"rest",
@@ -96,12 +127,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8998/Practico3/rest/estudiantes/estudianteById?libreta=1",
+					"raw": "http://localhost:8080/Practico3/rest/estudiantes/estudianteById?libreta=38",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8998",
+					"port": "8080",
 					"path": [
 						"Practico3",
 						"rest",
@@ -111,7 +142,7 @@
 					"query": [
 						{
 							"key": "libreta",
-							"value": "1"
+							"value": "38"
 						}
 					]
 				}
@@ -124,12 +155,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8998/Practico3/rest/estudiantes/estudianteByGenero?genero=femenino",
+					"raw": "http://localhost:8080/Practico3/rest/estudiantes/estudianteByGenero?genero=femenino",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8998",
+					"port": "8080",
 					"path": [
 						"Practico3",
 						"rest",
@@ -152,12 +183,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8998/Practico3/rest/carreras/listaCarreras",
+					"raw": "http://localhost:8080/Practico3/rest/carreras/listaCarreras",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8998",
+					"port": "8080",
 					"path": [
 						"Practico3",
 						"rest",
@@ -169,28 +200,34 @@
 			"response": []
 		},
 		{
-			"name": "2g estudianteByCiudad?ciudad=Tandil",
+			"name": "2g estudianteByCiudadAndCarrera",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ciudad\": \"Tandil\",\r\n    \"carrera\": {\r\n        \"id\" : 1,\r\n        \"nombre\" : \"Sistemas\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8998/Practico3/rest/estudiantes/estudianteByCiudad?ciudad=Tandil",
+					"raw": "http://localhost:8080/Practico3/rest/estudiantes/estudianteByCarreraAndCiudad",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8998",
+					"port": "8080",
 					"path": [
 						"Practico3",
 						"rest",
 						"estudiantes",
-						"estudianteByCiudad"
-					],
-					"query": [
-						{
-							"key": "ciudad",
-							"value": "Tandil"
-						}
+						"estudianteByCarreraAndCiudad"
 					]
 				}
 			},
@@ -202,12 +239,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8998/Practico3/rest/reporte/reporteGraduados",
+					"raw": "http://localhost:8080/Practico3/rest/reporte/reporteGraduados",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8998",
+					"port": "8080",
 					"path": [
 						"Practico3",
 						"rest",

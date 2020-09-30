@@ -13,15 +13,17 @@ import repository.EstudianteCarreraRepositoryImpl;
 
 @Path("/reporte")
 public class ReporteController {
-
+  /**
+   * Punto 2h;
+   * @return
+   */
   @GET
-  @Path("/estudianteByCiudad")
+  @Path("/reporteGraduados")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getReporte() {
     try {
-      EstudianteCarreraRepository estudianteCarreraRepository =
-          new EstudianteCarreraRepositoryImpl();
-      List<ReporteCarrera> reporteCarreras = estudianteCarreraRepository.getReporteCarrera();
+
+      List<ReporteCarrera> reporteCarreras = LectorCicloDeVida.estudianteCarreraRepository.getReporteCarrera();
       Collections.sort(reporteCarreras);
       return Response
           .status(Response.Status.OK)

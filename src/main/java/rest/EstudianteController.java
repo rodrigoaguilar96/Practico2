@@ -1,6 +1,8 @@
 package rest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,11 +13,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Estudiante;
-import repository.EstudianteCarreraRepository;
-import repository.EstudianteCarreraRepositoryImpl;
-import repository.EstudianteRepository;
-import repository.EstudianteRepositoryImpl;
+import model.dto.ReporteCarrera;
+import repository.*;
+import rest.request.EstudiantesbyCiudadAndCarreraRequest;
 import rest.request.MatricularEstudianteRequest;
+import rest.response.EstudianteListResponse;
 
 @Path("/estudiantes")
 public class EstudianteController {
@@ -32,8 +34,7 @@ public class EstudianteController {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response saveEstudiante(Estudiante estudiante) {
     try {
-      EstudianteRepository estudianteRepository = new EstudianteRepositoryImpl();
-      estudianteRepository.save(estudiante);
+      LectorCicloDeVida.estudianteRepository.save(estudiante);
       return Response
           .status(Response.Status.OK)
           .entity(estudiante)
@@ -60,11 +61,8 @@ public class EstudianteController {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response matricularEstudiante(MatricularEstudianteRequest matricularEstudianteRequest) {
     try {
-      EstudianteCarreraRepository estudianteCarreraRepository = new EstudianteCarreraRepositoryImpl();
-      EstudianteRepository estudianteRepository = new EstudianteRepositoryImpl();
-      estudianteCarreraRepository.matricular(matricularEstudianteRequest.getCarrera(),
+      LectorCicloDeVida.estudianteCarreraRepository.matricular(matricularEstudianteRequest.getCarrera(),
           matricularEstudianteRequest.getEstudiante(), LocalDate.now());
-      estudianteRepository.save(matricularEstudianteRequest.getEstudiante());
       return Response
           .status(Response.Status.OK)
           .entity(matricularEstudianteRequest)
@@ -88,11 +86,11 @@ public class EstudianteController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getListaEstudiantes() {
     try {
-      EstudianteRepository estudianteRepository = new EstudianteRepositoryImpl();
-      List<Estudiante> estudianteList = estudianteRepository.findAllSortByNombre();
+      List<Estudiante> estudianteListResponse = LectorCicloDeVida.estudianteRepository.findAllSortByNombre();
+      System.out.print(estudianteListResponse);
       return Response
           .status(Response.Status.OK)
-          .entity(estudianteList)
+          .entity(estudianteListResponse)
           .build();
     } catch (Exception e) {
       String error = "Error al Obtener lista de estudiantes ordenada por nombre.";
@@ -114,10 +112,10 @@ public class EstudianteController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEstudiantebyLibreta(@QueryParam("libreta") Integer libreta) {
     try {
-      EstudianteRepository estudianteRepository = new EstudianteRepositoryImpl();
+      Estudiante estudiante = LectorCicloDeVida.estudianteRepository.findByLibretaUniversitaria(libreta);
       return Response
           .status(Response.Status.OK)
-          .entity(estudianteRepository.findByLibretaUniversitaria(libreta))
+          .entity(estudiante)
           .build();
     } catch (Exception e) {
       String error = "Error al Obtener Estudiante por la Libreta Universitaria";
@@ -139,8 +137,7 @@ public class EstudianteController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEstudiantebyGenero(@QueryParam("genero") String genero) {
     try {
-      EstudianteRepository estudianteRepository = new EstudianteRepositoryImpl();
-      List<Estudiante> estudiantesByGenero = estudianteRepository.findByGenero(genero);
+      List<Estudiante> estudiantesByGenero = LectorCicloDeVida.estudianteRepository.findByGenero(genero);
       return Response
           .status(Response.Status.OK)
           .entity(estudiantesByGenero)
@@ -155,17 +152,19 @@ public class EstudianteController {
   }
 
   /**
-   * Punto 2g.
-   * @param ciudad
-   * @return Estudiantes de una carrera por ciudad
+   * Punto 2g
+   * @param estudiantesbyCiudadAndCarreraRequest
+   * @return
    */
   @GET
-  @Path("/reporteGraduados")
+  @Path("/estudianteByCarreraAndCiudad")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getEstudiantebyCiudad(@QueryParam("ciudad") String ciudad) {
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response getEstudiantebyCiudad(EstudiantesbyCiudadAndCarreraRequest estudiantesbyCiudadAndCarreraRequest) {
     try {
-      EstudianteRepository estudianteRepository = new EstudianteRepositoryImpl();
-      List<Estudiante> estudiantesByCiudad = estudianteRepository.findByGenero(ciudad);
+      List<Estudiante> estudiantesByCiudad = LectorCicloDeVida.estudianteRepository.findAllByCarreraAndCiudad(estudiantesbyCiudadAndCarreraRequest
+                      .getCarrera()
+              ,estudiantesbyCiudadAndCarreraRequest.getCiudad());
       return Response
           .status(Response.Status.OK)
           .entity(estudiantesByCiudad)
@@ -178,4 +177,5 @@ public class EstudianteController {
           .build();
     }
   }
+
 }

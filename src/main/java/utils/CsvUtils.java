@@ -19,12 +19,9 @@ import repository.EstudianteCarreraRepository;
 import repository.EstudianteCarreraRepositoryImpl;
 import repository.EstudianteRepository;
 import repository.EstudianteRepositoryImpl;
+import rest.LectorCicloDeVida;
 
 public class CsvUtils {
-  private static final CarreraRepository carreraRepository = new CarreraRepositoryImpl();
-  private static final EstudianteRepository estudianteRepository = new EstudianteRepositoryImpl();
-  private static final EstudianteCarreraRepository estudianteCarreraRepository =
-      new EstudianteCarreraRepositoryImpl();
 
   public CsvUtils() {}
 
@@ -37,7 +34,7 @@ public class CsvUtils {
       carreras.add(new Carrera(id, nombre));
     }
     for (Carrera carrera : carreras) {
-      carreraRepository.save(carrera);
+      LectorCicloDeVida.carreraRepository.save(carrera);
     }
   }
 
@@ -56,7 +53,7 @@ public class CsvUtils {
           new Estudiante(libretaUniversitaria, nombre, apellido, edad, documento, genero, ciudad));
     }
     for (Estudiante estudiante : estudiantes) {
-      estudianteRepository.save(estudiante);
+      LectorCicloDeVida.estudianteRepository.save(estudiante);
     }
   }
 
@@ -78,7 +75,7 @@ public class CsvUtils {
           new EstudianteCarrera(idCarrera, idEstudiante, fechaInscripcion, fechaGraduacion));
     }
     for (EstudianteCarrera estudianteCarrera : estudianteCarreras) {
-      estudianteCarreraRepository.save(estudianteCarrera);
+      LectorCicloDeVida.estudianteCarreraRepository.save(estudianteCarrera);
     }
   }
 }
