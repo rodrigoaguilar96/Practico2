@@ -18,6 +18,14 @@ public class DatosReporteCarrera implements Comparable<DatosReporteCarrera> {
     this.inscriptos = inscriptos;
   }
 
+  public Integer getInscriptos() {
+    return inscriptos;
+  }
+
+  public Integer getEgresados() {
+    return egresados;
+  }
+
   public void setEgresados(Integer egresados) {
     this.egresados = egresados;
   }

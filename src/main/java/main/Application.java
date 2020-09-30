@@ -24,8 +24,14 @@ public class Application {
 
   public static void csv() throws IOException {
     CsvUtils csvUtils = new CsvUtils();
-    csvUtils.uploadCarreras(new FileReader("src/main/resources/carrera.csv"));
-    csvUtils.uploadEstudiante(new FileReader("src/main/resources/estudiante.csv"));
-    csvUtils.uploadEstudianteCarrera(new FileReader("src/main/resources/estudianteCarrera.csv"));
+    csvUtils.uploadCarreras(
+        new FileReader(
+            "D:\\Documentos\\Workspace\\IntellJ\\Arqui\\Practico 3\\Practico3\\src\\main\\webapp\\carrera.csv"));
+    csvUtils.uploadEstudiante(
+        new FileReader(
+            "D:\\Documentos\\Workspace\\IntellJ\\Arqui\\Practico 3\\Practico3\\src\\main\\webapp\\estudiante.csv"));
+    csvUtils.uploadEstudianteCarrera(
+        new FileReader(
+            "D:\\Documentos\\Workspace\\IntellJ\\Arqui\\Practico 3\\Practico3\\src\\main\\webapp\\estudianteCarrera.csv"));
   }
 }
