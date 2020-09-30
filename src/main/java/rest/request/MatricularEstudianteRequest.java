@@ -1,8 +1,5 @@
 package rest.request;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import model.Carrera;
 import model.Estudiante;
 
