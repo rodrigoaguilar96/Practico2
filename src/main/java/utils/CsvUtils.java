@@ -1,7 +1,7 @@
 package utils;
 
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,19 +13,13 @@ import model.EstudianteCarrera;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import repository.CarreraRepository;
-import repository.CarreraRepositoryImpl;
-import repository.EstudianteCarreraRepository;
-import repository.EstudianteCarreraRepositoryImpl;
-import repository.EstudianteRepository;
-import repository.EstudianteRepositoryImpl;
 import rest.LectorCicloDeVida;
 
 public class CsvUtils {
 
   public CsvUtils() {}
 
-  public void uploadCarreras(FileReader fileReader) throws IOException {
+  public void uploadCarreras(InputStreamReader fileReader) throws IOException {
     CSVParser carreraCsv = CSVFormat.DEFAULT.withHeader().parse(fileReader);
     List<Carrera> carreras = new ArrayList<>();
     for (CSVRecord row : carreraCsv) {
@@ -38,7 +32,7 @@ public class CsvUtils {
     }
   }
 
-  public void uploadEstudiante(FileReader fileReader) throws IOException {
+  public void uploadEstudiante(InputStreamReader fileReader) throws IOException {
     CSVParser carreraCsv = CSVFormat.DEFAULT.withHeader().parse(fileReader);
     List<Estudiante> estudiantes = new ArrayList<>();
     for (CSVRecord row : carreraCsv) {
@@ -57,7 +51,7 @@ public class CsvUtils {
     }
   }
 
-  public void uploadEstudianteCarrera(FileReader fileReader) throws IOException {
+  public void uploadEstudianteCarrera(InputStreamReader fileReader) throws IOException {
     CSVParser carreraCsv = CSVFormat.DEFAULT.withHeader().parse(fileReader);
     String europeanDatePattern = "yyyy-MM-dd";
     DateTimeFormatter europeanDateFormatter = DateTimeFormatter.ofPattern(europeanDatePattern);
