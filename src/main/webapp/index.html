@@ -32,22 +32,11 @@
 							<label class="mr-2 pt-2">Criterio:</label>
 							<input type="text" class="form-control mr-2" id="" aria-describedby="emailHelp">
 							<select class="custom-select mr-2">
-								<option selected>Filtro</option>
-								<option value="1">Género</option>
-								<option value="2">Nro Libreta</option>
-								<option value="3">Ciudad</option>
-								<option value="4">Carrera</option>
-								<option value="5">Carrera y Ciudad</option>
-							</select>
-							<select class="custom-select">
-								<option selected>Orden</option>
-								<option value="1">Nombre</option>
-								<option value="2">Apellido</option>
+								<option value="1">Todos</option>
+								<option value="2">Género</option>
 								<option value="3">Nro Libreta</option>
-								<option value="4">Ciudad</option>
-								<option value="5">Género</option>
+								<option value="4">Carrera y Ciudad</option>
 							</select>
-							
 						</div>
 						<button type="button" class="btn btn-outline-secondary">Buscar</button>
 					</div>
@@ -163,20 +152,18 @@
 									<div class="row mb-3">
 										<div class="col">
 											<label for="">Nro Libreta</label>
-											<select class="custom-select">
-												<option value="100">100</option>
-												<option value="200">200</option>
-												<option value="300">300</option>
-											</select>
+											<input type="number" class="form-control" placeholder="">
+										</div>
+									</div>
+									<div class="row mb-3">
+										<div class="col">
+											<label for="">ID Carrera</label>
+											<input type="number" class="form-control" placeholder="">
 										</div>
 										<div class="col">
-											<label for="">Carrera</label>
-											<select class="custom-select">
-												<option value="1">Tudai</option>
-												<option value="2">Sistemas</option>
-												<option value="3">Otro</option>
-											</select>
-									  	</div>
+											<label for="">Nombre Carrera</label>
+											<input type="Text" class="form-control" placeholder="">
+										</div>
 									</div>
 								</form>
 							</div>
