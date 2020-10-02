@@ -115,7 +115,7 @@ let botonBuscar = document.querySelector("#botonBuscar").addEventListener("click
 function llenarTabla(tbody,json){
     
     vaciarTabla(tbody);
-    console.log(keys(json).length);
+    console.log(json);
 
     console.log(json.length);
     for (let i = 0; i < json.length; i++) {
