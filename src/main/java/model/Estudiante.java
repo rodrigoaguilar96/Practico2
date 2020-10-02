@@ -10,7 +10,7 @@ public class Estudiante {
 
   String nombre;
 
-  String apelldio;
+  String apellido;
 
   Integer edad;
 
@@ -24,13 +24,13 @@ public class Estudiante {
 
   public Estudiante(
       String nombre,
-      String apelldio,
+      String apellido,
       Integer edad,
       Integer documento,
       String genero,
       String ciudad) {
     this.nombre = nombre;
-    this.apelldio = apelldio;
+    this.apellido = apellido;
     this.edad = edad;
     this.documento = documento;
     this.genero = genero;
@@ -40,14 +40,14 @@ public class Estudiante {
   public Estudiante(
       Integer libretaUniversitaria,
       String nombre,
-      String apelldio,
+      String apellido,
       Integer edad,
       Integer documento,
       String genero,
       String ciudad) {
     this.libretaUniversitaria = libretaUniversitaria;
     this.nombre = nombre;
-    this.apelldio = apelldio;
+    this.apellido = apellido;
     this.edad = edad;
     this.documento = documento;
     this.genero = genero;
@@ -62,8 +62,8 @@ public class Estudiante {
     return nombre;
   }
 
-  public String getApelldio() {
-    return apelldio;
+  public String getApellido() {
+    return apellido;
   }
 
   public Integer getEdad() {
@@ -91,7 +91,7 @@ public class Estudiante {
         + nombre
         + '\''
         + ", apelldio='"
-        + apelldio
+        + apellido
         + '\''
         + ", edad="
         + edad
