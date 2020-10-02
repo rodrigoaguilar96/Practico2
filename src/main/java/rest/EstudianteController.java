@@ -87,7 +87,6 @@ public class EstudianteController {
   public Response getListaEstudiantes() {
     try {
       List<Estudiante> estudianteListResponse = LectorCicloDeVida.estudianteRepository.findAllSortByNombre();
-      System.out.print(estudianteListResponse);
       return Response
           .status(Response.Status.OK)
           .entity(estudianteListResponse)
