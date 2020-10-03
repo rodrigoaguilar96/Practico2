@@ -153,8 +153,9 @@ public class EstudianteController {
   }
 
   /**
-   * Punto 2g
-   * @param estudiantesbyCiudadAndCarreraRequest
+   *
+   * @param ciudad
+   * @param carrera
    * @return
    */
   @GET
