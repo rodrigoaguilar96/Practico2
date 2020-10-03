@@ -30,52 +30,30 @@
 						</div>
 						<div class="d-flex">
 							<label class="mr-2 pt-2">Criterio:</label>
-							<input type="text" class="form-control mr-2" id="" aria-describedby="emailHelp">
-							<select class="custom-select mr-2">
+							<input type="text" class="form-control mr-2" id="inputCriterio" aria-describedby="emailHelp">
+							<select class="custom-select mr-2" id="selectCriterio">
 								<option value="1">Todos</option>
 								<option value="2">Género</option>
 								<option value="3">Nro Libreta</option>
 								<option value="4">Carrera y Ciudad</option>
 							</select>
 						</div>
-						<button type="button" class="btn btn-outline-secondary">Buscar</button>
+						<button type="button" class="btn btn-outline-secondary" id="botonBuscar">Buscar</button>
 					</div>
-					<table class="table mt-3 table-striped">
+					<table class="table mt-3 table-striped" id="tableEstudiantes">
 						<thead class="thead-dark">
 							<tr>
-							<th scope="col">Nombre/s</th>
-							<th scope="col">Apellido/s</th>
-							<th scope="col">Edad</th>
-							<th scope="col">Género</th>
-							<th scope="col">Documento</th>
-							<th scope="col">Nro. Libreta</th>
+								<th scope="col">Nro. Libreta</th >
+								<th scope="col">Nombre/s</th>
+								<th scope="col">Apellido/s</th>
+								<th scope="col">Edad</th>
+								<th scope="col">Documento</th>
+								<th scope="col">Género</th>
+								<th scope="col">Ciudad</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-							<th>1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-							<td>@mdo</td>
-							<td>@mdo</td>
-							</tr>
-							<tr>
-							<th scope="row">2</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-							<td>@mdo</td>
-							<td>@mdo</td>
-							</tr>
-							<tr>
-							<th scope="row">3</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-							<td>@mdo</td>
-							<td>@mdo</td>
-							</tr>
+						<tbody id="tbodyEstudiantes">
+							
 						</tbody>
 					</table>
 					<div class="modal fade" id="estudianteModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
@@ -133,7 +111,7 @@
 							</div>
 							<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-success">Aceptar</button>
+							<button type="button" id="postEstudiante"class="btn btn-success">Aceptar</button>
 							</div>
 						</div>
 						</div>
