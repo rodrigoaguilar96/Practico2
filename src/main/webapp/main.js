@@ -1,6 +1,7 @@
 document.querySelector(".cargarReporte").addEventListener("click", cargarReporte);
 document.querySelector(".carrera").addEventListener("click", cargarCarrera);
 document.querySelector("#postEstudiante").addEventListener("click", altaEstudiante);
+document.querySelector("#postMatricula").addEventListener("click", matricularEstudiante);
 document.querySelector("#selectCriterio").addEventListener("click", () => {
     let d = document.querySelector("#inputCriterio")
     d.value = ""
@@ -197,28 +198,24 @@ function listarEstudiantesByCarreraAndCiudad(input) {
 }
 //2a Dar de alta un estudiante
 function altaEstudiante() {
-    let nombre = document.querySelector().value;
-    let libretaUniversitaria = document.querySelector().value
-    let apellido = document.querySelector().value
-    let edad = document.querySelector().value
-    let documento = document.querySelector().value
-    let genero = document.querySelector().value
-    let ciudad = document.querySelector().value
+    let nombre = document.querySelector(".nombreInputAlta").value;
+    let apellido = document.querySelector(".apellidoInputAlta").value;
+    let edad = document.querySelector(".edadInputAlta").value;
+    let genero = document.querySelector(".generoSelectAlta").value;
+    let documento = document.querySelector(".documentoInputAlta").value;
+    let ciudad = document.querySelector(".ciudadInputAlta").value;
+    let libreta = document.querySelector(".libretaInputAlta").value;
+
     let estudiante = {
-        "libretaUniversitaria": libretaUniversitaria,
-
+        "libretaUniversitaria": libreta,
         "nombre": nombre,
-
         "apelldio": apellido,
-
         "edad": edad,
-
         "documento": documento,
-
         "genero": genero,
-
         "ciudad": ciudad
     };
+    console.log(estudiante);
     let url = "http://localhost:8080/Practico3/rest/estudiantes/addEstudiante";
     fetch(url, {
         method: 'POST',
@@ -228,7 +225,6 @@ function altaEstudiante() {
         body: JSON.stringify(estudiante)
     });
 }
-
 async function mostrarEstudiante(json) {
     console.log(json);
     let col = [];
@@ -273,4 +269,25 @@ async function mostrarEstudiante(json) {
         divContainer.appendChild(trb)
     }
     console.log(divContainer);
+}
+// 2b Matricular un Estudiante en una Carrera
+function matricularEstudiante(){
+    let libreta = document.querySelector(".libretaInputMatricula").value;
+    let idCarrera = document.querySelector(".idCarreraInputMatricula").value;
+    let nombreCarrera = document.querySelector(".nombreCarreraInputMatricula").value;
+
+    let matricula = {
+        "libretaUniversataria": libreta,
+        "idCarrera": idCarrera,
+        "nombreCarrera": nombreCarrera
+    }
+    console.log(matricula);
+    let url = "http://localhost:8080/Practico3/rest/estudiantes/matricularEstudiante";
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(matricula)
+    });
 }

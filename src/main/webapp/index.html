@@ -70,48 +70,48 @@
 									<div class="row mb-3">
 										<div class="col">
 											<label for="">Nombre</label>
-											<input type="text" class="form-control" placeholder="">
+											<input type="text" class="form-control nombreInputAlta" placeholder="">
 										</div>
 										<div class="col">
 											<label for="">Apellido</label>
-											<input type="text" class="form-control" placeholder="">
+											<input type="text" class="form-control apellidoInputAlta" placeholder="">
 									  	</div>
 									</div>
 									<div class="row mb-3">
 										<div class="col">
 											<label for="">Edad</label>
-											<input type="number" class="form-control" placeholder="">
+											<input type="number" class="form-control edadInputAlta numerico" min="0">
 										</div>
 										<div class="col">
 											<label for="">Género</label>
-											<select class="custom-select">
-												<option value="1">Masculino</option>
-												<option value="2">Femenino</option>
-												<option value="3">Otro</option>
+											<select class="custom-select generoSelectAlta">
+												<option value="Masculino">Masculino</option>
+												<option value="Femenino">Femenino</option>
+												<option value="Otro">Otro</option>
 											</select>
 									  	</div>
 									</div>
 									<div class="row mb-3">
 										<div class="col">
 											<label for="">Documento</label>
-											<input type="number" class="form-control" placeholder="">
+											<input type="number" class="form-control documentoInputAlta numerico" min="0">
 										</div>
 										<div class="col">
 											<label for="">Ciudad</label>
-											<input type="text" class="form-control" placeholder="">
+											<input type="text" class="form-control ciudadInputAlta" placeholder="">
 									  	</div>
 									</div>
 									<div class="row mb-3">
 										<div class="col">
 											<label for="">Nro Libreta</label>
-											<input type="number" class="form-control" placeholder="">
+											<input type="number" class="form-control libretaInputAlta numerico" min="0">
 										</div>
 									</div>
 								</form>
 							</div>
 							<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-							<button type="button" id="postEstudiante"class="btn btn-success">Aceptar</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+								<button type="button" id="postEstudiante"class="btn btn-success">Aceptar</button>
 							</div>
 						</div>
 						</div>
@@ -130,24 +130,24 @@
 									<div class="row mb-3">
 										<div class="col">
 											<label for="">Nro Libreta</label>
-											<input type="number" class="form-control" placeholder="">
+											<input type="number" class="form-control libretaInputMatricula numerico" min="0">
 										</div>
 									</div>
 									<div class="row mb-3">
 										<div class="col">
 											<label for="">ID Carrera</label>
-											<input type="number" class="form-control" placeholder="">
+											<input type="number" class="form-control idCarreraInputMatricula numerico" min="0">
 										</div>
 										<div class="col">
 											<label for="">Nombre Carrera</label>
-											<input type="Text" class="form-control" placeholder="">
+											<input type="Text" class="form-control nombreCarreraInputMatricula" placeholder="">
 										</div>
 									</div>
 								</form>
 							</div>
 							<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-success">Aceptar</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+								<button type="button" class="btn btn-success" id="postMatricula">Aceptar</button>
 							</div>
 						</div>
 						</div>
@@ -155,10 +155,8 @@
 				</section>
 			</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="">
-				<section>
-					<h2>
-						Carreras Ordenadas por inscriptos
-					</h2>
+				<section class="mt-2">
+					<h2>Carreras Ordenadas por inscriptos</h2>
 				</section>
 				<section id="tablaCarreras">
 					
