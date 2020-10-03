@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 @Entity
 public class EstudianteCarrera {
 
-  @EmbeddedId EstudianteCarreraPK estudianteCarreraPK;
+  @EmbeddedId
+  Matricula matricula;
 
   LocalDate fechaInscripcion;
 
@@ -16,8 +17,8 @@ public class EstudianteCarrera {
   public EstudianteCarrera() {}
 
   public EstudianteCarrera(Integer idCarrera, Integer idEstudiante, LocalDate fechaInscripcion) {
-    EstudianteCarreraPK estudianteCarreraPK = new EstudianteCarreraPK(idCarrera, idEstudiante);
-    this.estudianteCarreraPK = estudianteCarreraPK;
+    Matricula matricula = new Matricula(idCarrera, idEstudiante);
+    this.matricula = matricula;
     this.fechaInscripcion = fechaInscripcion;
   }
 
@@ -26,8 +27,8 @@ public class EstudianteCarrera {
       Integer idEstudiante,
       LocalDate fechaInscripcion,
       LocalDate fechaGraduacion) {
-    EstudianteCarreraPK estudianteCarreraPK = new EstudianteCarreraPK(idCarrera, idEstudiante);
-    this.estudianteCarreraPK = estudianteCarreraPK;
+    Matricula matricula = new Matricula(idCarrera, idEstudiante);
+    this.matricula = matricula;
     this.fechaInscripcion = fechaInscripcion;
     this.fechaGraduacion = fechaGraduacion;
   }
@@ -36,7 +37,7 @@ public class EstudianteCarrera {
   public String toString() {
     return "EstudianteCarrera{"
         + ""
-        + estudianteCarreraPK
+        + matricula
         + ", fechaInscripcion="
         + fechaInscripcion
         + ", fechaGraduacion="
@@ -44,8 +45,8 @@ public class EstudianteCarrera {
         + '}';
   }
 
-  public EstudianteCarreraPK getEstudianteCarreraPK() {
-    return estudianteCarreraPK;
+  public Matricula getEstudianteCarreraPK() {
+    return matricula;
   }
 
   public LocalDate getFechaInscripcion() {

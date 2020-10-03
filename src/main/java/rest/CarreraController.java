@@ -53,7 +53,7 @@ public class CarreraController {
               .entity(carrera)
               .build();
     } catch (Exception e) {
-      String error = "Error al insertar Estudiante";
+      String error = "Error al insertar Carrera";
       return Response
               .serverError()
               .entity(error)

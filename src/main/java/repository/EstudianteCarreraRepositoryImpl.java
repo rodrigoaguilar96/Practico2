@@ -37,6 +37,7 @@ public class EstudianteCarreraRepositoryImpl extends GlobalRepository<Estudiante
     return (EstudianteCarrera) query.getSingleResult();
   }
 
+  //TODO refactor
   @Override
   public List<ReporteCarrera> getReporteCarrera() {
     List<ReporteCarrera> reporteCarreras = new ArrayList<>();
@@ -46,7 +47,7 @@ public class EstudianteCarreraRepositoryImpl extends GlobalRepository<Estudiante
       ReporteCarrera reporteCarrera = new ReporteCarrera(carrera);
       Query query =
           entityManager.createQuery(
-              "SELECT ec from EstudianteCarrera ec where ec.estudianteCarreraPK.idCarrera = :id order by fechaInscripcion");
+              "SELECT ec from EstudianteCarrera ec where ec.matricula.idCarrera = :id order by fechaInscripcion");
       query.setParameter("id", carrera.getId());
 
       List<EstudianteCarrera> estudianteCarreras = query.getResultList();

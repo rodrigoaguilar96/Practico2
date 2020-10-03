@@ -63,8 +63,10 @@ public class EstudianteController {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response matricularEstudiante(MatricularEstudianteRequest matricularEstudianteRequest) {
     try {
-      LectorCicloDeVida.estudianteCarreraRepository.matricular(matricularEstudianteRequest.getCarrera(),
-          matricularEstudianteRequest.getEstudiante(), LocalDate.now());
+      Estudiante estudiante = LectorCicloDeVida.estudianteRepository.findByLibretaUniversitaria(matricularEstudianteRequest.getEstudiante());
+      Carrera carrera = LectorCicloDeVida.carreraRepository.findById(matricularEstudianteRequest.getCarrera());
+      LectorCicloDeVida.estudianteCarreraRepository.matricular(carrera,
+              estudiante, LocalDate.now());
       return Response
           .status(Response.Status.OK)
           .entity(matricularEstudianteRequest)
