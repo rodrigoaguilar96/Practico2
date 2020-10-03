@@ -1,6 +1,13 @@
 document.querySelector(".cargarReporte").addEventListener("click", cargarReporte);
 document.querySelector(".carrera").addEventListener("click", cargarCarrera);
-
+document.querySelector("#postEstudiante").addEventListener("click", altaEstudiante);
+document.querySelector("#selectCriterio").addEventListener("click", () => {
+    let d = document.querySelector("#inputCriterio")
+    d.value = ""
+    if (document.querySelector("#selectCriterio").value == 4) {
+        d.value = "idCarrera,NombreCiudad"
+    }
+})
 function cargarReporte() {
     console.log("entre")
     url = "http://localhost:8080/Practico3/rest/reporte/reporteGraduados";
@@ -80,7 +87,7 @@ async function mostrarCarrera(json) {
     let tr = document.createElement("tr")
     let thead = document.createElement("thead")
     let table = document.createElement("table");
-thead.className = "thead-dark"
+    thead.className = "thead-dark"
     var divContainer = document.querySelector("#tablaCarreras");
     divContainer.innerHTML = "";
     for (let index = 0; index < col.length; index++) {
@@ -93,27 +100,27 @@ thead.className = "thead-dark"
     for (let i = 0; i < json.length; i++) {
         table.className = "table mt-3 table-striped"
         let tr = document.createElement("tr")
-        
-        
+
+
         divContainer.appendChild(table);
         tr = document.createElement("tr");
-            let id = document.createElement("td")
-            let nombre = document.createElement("td")
-            id.append(json[i].carrera.id)
-            nombre.append(json[i].carrera.nombre)
+        let id = document.createElement("td")
+        let nombre = document.createElement("td")
+        id.append(json[i].carrera.id)
+        nombre.append(json[i].carrera.nombre)
 
-            tr.appendChild(id)
-            tr.appendChild(nombre)
-            table.appendChild(tr)
+        tr.appendChild(id)
+        tr.appendChild(nombre)
+        table.appendChild(tr)
     }
 }
 
 
 //lautaro
 let tbodyEstudiantes = document.querySelector("#tbodyEstudiantes");
-let botonBuscar = document.querySelector("#botonBuscar").addEventListener("click",realizarBusqueda);
-function llenarTabla(tbody,json){
-    
+let botonBuscar = document.querySelector("#botonBuscar").addEventListener("click", realizarBusqueda);
+function llenarTabla(tbody, json) {
+
     vaciarTabla(tbody);
     console.log(json);
 
@@ -130,12 +137,12 @@ function llenarTabla(tbody,json){
         tbody.appendChild(tr);
     }
 }
-function vaciarTabla(tbody){
-    if(tbody.children.length > 0){
+function vaciarTabla(tbody) {
+    if (tbody.children.length > 0) {
         tbody.innerHTML = "";
     }
 }
-function realizarBusqueda(){
+function realizarBusqueda() {
     let input = document.querySelector("#inputCriterio").value;
     let select = document.querySelector("#selectCriterio").value;
     switch (select) {
@@ -146,49 +153,71 @@ function realizarBusqueda(){
     }
 }
 //2c Listar estudiantes
-function listarEstudiantes(){
+function listarEstudiantes() {
     let url = "http://localhost:8080/Practico3/rest/estudiantes/listaEstudiantes";
-    
-	fetch(url)
-	.then(r => r.json())
-    .then(json => {
-        llenarTabla(tbodyEstudiantes,json);
-	})
+
+    fetch(url)
+        .then(r => r.json())
+        .then(json => {
+            llenarTabla(tbodyEstudiantes, json);
+        })
 }
 //2d Listar estudiantes segun libreta
-function listarEstudiantesByLibreta(id){
-	url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteById?libreta="+id;
-	fetch(url)
-	.then(r => r.json())
-    .then(json => {
-        llenarTabla(tbodyEstudiantes,json);
-	})
+function listarEstudiantesByLibreta(id) {
+    url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteById?libreta=" + id;
+    fetch(url)
+        .then(r => r.json())
+        .then(json => {
+            mostrarEstudiante(json);
+        })
 }
 //2e Listar estudiantes segun genero
-function listarEstudiantesByGenero(genero){
-	url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteByGenero?genero="+genero;
-	fetch(url)
-	.then(r => r.json())
-    .then(json => {
-        llenarTabla(tbodyEstudiantes,json);
-	})
+function listarEstudiantesByGenero(genero) {
+    url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteByGenero?genero=" + genero;
+    fetch(url)
+        .then(r => r.json())
+        .then(json => {
+            llenarTabla(tbodyEstudiantes, json);
+        })
 }
 //2g Listar estudiantes segun carrera y ciudad
-function listarEstudiantesByCarreraAndCiudad(input){
+function listarEstudiantesByCarreraAndCiudad(input) {
+    console.log("ESTY");
     let split = input.split(",");
     let carrera = split[0];
     let ciudad = split[1];
-	url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteByCarreraAndCiudad";
-	fetch(url)
-	.then(r => r.json())
-    .then(json => {
-        llenarTabla(tbodyEstudiantes,json);
-	})
+    url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteByCarreraAndCiudad?ciudad=" + ciudad + "&carrera=" + carrera;
+    console.log(url);
+    fetch(url)
+        .then(r => r.json())
+        .then(json => {
+            console.log(json);
+            llenarTabla(tbodyEstudiantes, json);
+        })
 }
 //2a Dar de alta un estudiante
-function altaEstudiante(){
+function altaEstudiante() {
+    let nombre = document.querySelector().value;
+    let libretaUniversitaria = document.querySelector().value
+    let apellido = document.querySelector().value
+    let edad = document.querySelector().value
+    let documento = document.querySelector().value
+    let genero = document.querySelector().value
+    let ciudad = document.querySelector().value
     let estudiante = {
-        
+        "libretaUniversitaria": libretaUniversitaria,
+
+        "nombre": nombre,
+
+        "apelldio": apellido,
+
+        "edad": edad,
+
+        "documento": documento,
+
+        "genero": genero,
+
+        "ciudad": ciudad
     };
     let url = "http://localhost:8080/Practico3/rest/estudiantes/addEstudiante";
     fetch(url, {
@@ -198,4 +227,50 @@ function altaEstudiante(){
         },
         body: JSON.stringify(estudiante)
     });
+}
+
+async function mostrarEstudiante(json) {
+    console.log(json);
+    let col = [];
+    var divContainer = document.querySelector("#tbodyEstudiantes");
+    console.log(divContainer);
+    col.push("libretaUniversitaria");
+    col.push("nombre");
+    col.push("apellido")
+    col.push("edad")
+    col.push("documento")
+    col.push("genero")
+    col.push("ciudad")
+
+
+    divContainer.innerHTML = "";
+    if (json != null) {
+        let trb = document.createElement("tr")
+        divContainer.appendChild(trb);
+        trb = document.createElement("tr");
+        let id = document.createElement("td")
+        let nombre = document.createElement("td")
+        let apellido = document.createElement("td")
+        let edad = document.createElement("td")
+        let documento = document.createElement("td")
+        let genero = document.createElement("td")
+        let ciudad = document.createElement("td")
+        id.append(json.libretaUniversitaria)
+        console.log(id);
+        nombre.append(json.nombre)
+        apellido.append(json.apellido)
+        edad.append(json.edad)
+        documento.append(json.documento)
+        genero.append(json.genero)
+        ciudad.append(json.ciudad)
+        trb.appendChild(id)
+        trb.appendChild(nombre)
+        trb.appendChild(apellido)
+        trb.appendChild(documento)
+        trb.appendChild(edad)
+        trb.appendChild(genero)
+        trb.appendChild(ciudad)
+        divContainer.appendChild(trb)
+    }
+    console.log(divContainer);
 }

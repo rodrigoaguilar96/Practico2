@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import model.Carrera;
 import model.Estudiante;
 import model.dto.ReporteCarrera;
 import repository.*;
@@ -159,11 +161,11 @@ public class EstudianteController {
   @Path("/estudianteByCarreraAndCiudad")
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response getEstudiantebyCiudad(EstudiantesbyCiudadAndCarreraRequest estudiantesbyCiudadAndCarreraRequest) {
+  public Response getEstudiantebyCiudad(@QueryParam("ciudad") String ciudad,@QueryParam("carrera") Integer carrera) {
     try {
-      List<Estudiante> estudiantesByCiudad = LectorCicloDeVida.estudianteRepository.findAllByCarreraAndCiudad(estudiantesbyCiudadAndCarreraRequest
-                      .getCarrera()
-              ,estudiantesbyCiudadAndCarreraRequest.getCiudad());
+      Carrera carrera1 = LectorCicloDeVida.carreraRepository.findById(carrera);
+      List<Estudiante> estudiantesByCiudad = LectorCicloDeVida.estudianteRepository.findAllByCarreraAndCiudad(carrera1
+              ,ciudad);
       return Response
           .status(Response.Status.OK)
           .entity(estudiantesByCiudad)
