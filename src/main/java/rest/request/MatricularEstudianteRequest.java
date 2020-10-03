@@ -4,22 +4,22 @@ import model.Carrera;
 import model.Estudiante;
 
 public class MatricularEstudianteRequest {
-  Estudiante estudiante;
-  Carrera carrera;
+  Integer estudiante;
+  Integer carrera;
 
-  public Estudiante getEstudiante() {
+  public Integer getEstudiante() {
     return estudiante;
   }
 
-  public void setEstudiante(Estudiante estudiante) {
+  public void setEstudiante(Integer estudiante) {
     this.estudiante = estudiante;
   }
 
-  public Carrera getCarrera() {
+  public Integer getCarrera() {
     return carrera;
   }
 
-  public void setCarrera(Carrera carrera) {
+  public void setCarrera(Integer carrera) {
     this.carrera = carrera;
   }
 }

@@ -5,22 +5,23 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class EstudianteCarreraPK implements Serializable {
+//TODO CAMBIAR NOMBRE
+public class Matricula implements Serializable {
 
   Integer idCarrera;
 
   Integer idEstudiante;
 
-  public EstudianteCarreraPK() {}
+  public Matricula() {}
 
-  public EstudianteCarreraPK(Integer idCarrera, Integer idEstudiante) {
+  public Matricula(Integer idCarrera, Integer idEstudiante) {
     this.idCarrera = idCarrera;
     this.idEstudiante = idEstudiante;
   }
 
   @Override
   public String toString() {
-    return "EstudianteCarreraPK{"
+    return "Matricula{"
         + "idCarrera="
         + idCarrera
         + ", idEstudiante="
@@ -36,7 +37,7 @@ public class EstudianteCarreraPK implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EstudianteCarreraPK that = (EstudianteCarreraPK) o;
+    Matricula that = (Matricula) o;
     return Objects.equals(idCarrera, that.idCarrera)
         && Objects.equals(idEstudiante, that.idEstudiante);
   }

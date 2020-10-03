@@ -209,7 +209,7 @@ function altaEstudiante() {
     let estudiante = {
         "libretaUniversitaria": libreta,
         "nombre": nombre,
-        "apelldio": apellido,
+        "apellido": apellido,
         "edad": edad,
         "documento": documento,
         "genero": genero,
@@ -274,12 +274,10 @@ async function mostrarEstudiante(json) {
 function matricularEstudiante(){
     let libreta = document.querySelector(".libretaInputMatricula").value;
     let idCarrera = document.querySelector(".idCarreraInputMatricula").value;
-    let nombreCarrera = document.querySelector(".nombreCarreraInputMatricula").value;
 
     let matricula = {
-        "libretaUniversataria": libreta,
-        "idCarrera": idCarrera,
-        "nombreCarrera": nombreCarrera
+        "estudiante": libreta,
+        "carrera": idCarrera
     }
     console.log(matricula);
     let url = "http://localhost:8080/Practico3/rest/estudiantes/matricularEstudiante";
