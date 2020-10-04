@@ -5,7 +5,6 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 
 @Embeddable
-//TODO CAMBIAR NOMBRE
 public class Matricula implements Serializable {
 
   Integer idCarrera;

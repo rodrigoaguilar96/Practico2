@@ -10,7 +10,6 @@ document.querySelector("#selectCriterio").addEventListener("click", () => {
     }
 })
 function cargarReporte() {
-    console.log("entre")
     url = "http://localhost:8080/Practico3/rest/reporte/reporteGraduados";
     fetch(url)
         .then(r => r.json())
@@ -21,7 +20,6 @@ function cargarReporte() {
 }
 
 async function mostrarReporte(json) {
-    console.log(json);
     let col = [];
     col.push("Año");
     col.push("Ingresos");
@@ -81,10 +79,10 @@ function cargarCarrera() {
         })
 }
 async function mostrarCarrera(json) {
-    console.log(json);
     let col = [];
     col.push("Id");
     col.push("Nombre");
+    col.push("Inscriptos")
     let tr = document.createElement("tr")
     let thead = document.createElement("thead")
     let table = document.createElement("table");
@@ -107,11 +105,13 @@ async function mostrarCarrera(json) {
         tr = document.createElement("tr");
         let id = document.createElement("td")
         let nombre = document.createElement("td")
+        let inscriptos = document.createElement("td")
         id.append(json[i].carrera.id)
         nombre.append(json[i].carrera.nombre)
-
+        inscriptos.append(json[i].inscriptos)
         tr.appendChild(id)
         tr.appendChild(nombre)
+        tr.appendChild(inscriptos)
         table.appendChild(tr)
     }
 }
@@ -121,13 +121,8 @@ async function mostrarCarrera(json) {
 let tbodyEstudiantes = document.querySelector("#tbodyEstudiantes");
 let botonBuscar = document.querySelector("#botonBuscar").addEventListener("click", realizarBusqueda);
 function llenarTabla(tbody, json) {
-
     vaciarTabla(tbody);
-    console.log(json);
-
-    console.log(json.length);
     for (let i = 0; i < json.length; i++) {
-        console.log("json adentro");
         let tr = document.createElement("TR");
         for (let key in json[i]) {
             let td = document.createElement("TD");
@@ -166,11 +161,14 @@ function listarEstudiantes() {
 //2d Listar estudiantes segun libreta
 function listarEstudiantesByLibreta(id) {
     url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteById?libreta=" + id;
-    fetch(url)
-        .then(r => r.json())
-        .then(json => {
-            mostrarEstudiante(json);
-        })
+    if (id != '') {
+        fetch(url)
+            .then(r => r.json())
+            .then(json => {
+                mostrarEstudiante(json);
+            })
+    }
+
 }
 //2e Listar estudiantes segun genero
 function listarEstudiantesByGenero(genero) {
@@ -183,18 +181,17 @@ function listarEstudiantesByGenero(genero) {
 }
 //2g Listar estudiantes segun carrera y ciudad
 function listarEstudiantesByCarreraAndCiudad(input) {
-    console.log("ESTY");
-    let split = input.split(",");
-    let carrera = split[0];
-    let ciudad = split[1];
-    url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteByCarreraAndCiudad?ciudad=" + ciudad + "&carrera=" + carrera;
-    console.log(url);
-    fetch(url)
-        .then(r => r.json())
-        .then(json => {
-            console.log(json);
-            llenarTabla(tbodyEstudiantes, json);
-        })
+    if (input != '') {
+        let split = input.split(",");
+        let carrera = split[0];
+        let ciudad = split[1];
+        url = "http://localhost:8080/Practico3/rest/estudiantes/estudianteByCarreraAndCiudad?ciudad=" + ciudad + "&carrera=" + carrera;
+        fetch(url)
+            .then(r => r.json())
+            .then(json => {
+                llenarTabla(tbodyEstudiantes, json);
+            })
+    }
 }
 //2a Dar de alta un estudiante
 function altaEstudiante() {
@@ -215,7 +212,6 @@ function altaEstudiante() {
         "genero": genero,
         "ciudad": ciudad
     };
-    console.log(estudiante);
     let url = "http://localhost:8080/Practico3/rest/estudiantes/addEstudiante";
     fetch(url, {
         method: 'POST',
@@ -223,13 +219,14 @@ function altaEstudiante() {
             "Content-type": "application/json"
         },
         body: JSON.stringify(estudiante)
-    });
+    }).then(r => r.json())
+        .then(json => {
+            console.log(json)
+        });
 }
 async function mostrarEstudiante(json) {
-    console.log(json);
     let col = [];
     var divContainer = document.querySelector("#tbodyEstudiantes");
-    console.log(divContainer);
     col.push("libretaUniversitaria");
     col.push("nombre");
     col.push("apellido")
@@ -252,7 +249,6 @@ async function mostrarEstudiante(json) {
         let genero = document.createElement("td")
         let ciudad = document.createElement("td")
         id.append(json.libretaUniversitaria)
-        console.log(id);
         nombre.append(json.nombre)
         apellido.append(json.apellido)
         edad.append(json.edad)
@@ -268,10 +264,9 @@ async function mostrarEstudiante(json) {
         trb.appendChild(ciudad)
         divContainer.appendChild(trb)
     }
-    console.log(divContainer);
 }
 // 2b Matricular un Estudiante en una Carrera
-function matricularEstudiante(){
+function matricularEstudiante() {
     let libreta = document.querySelector(".libretaInputMatricula").value;
     let idCarrera = document.querySelector(".idCarreraInputMatricula").value;
 
@@ -279,7 +274,6 @@ function matricularEstudiante(){
         "estudiante": libreta,
         "carrera": idCarrera
     }
-    console.log(matricula);
     let url = "http://localhost:8080/Practico3/rest/estudiantes/matricularEstudiante";
     fetch(url, {
         method: 'POST',
@@ -287,5 +281,8 @@ function matricularEstudiante(){
             "Content-type": "application/json"
         },
         body: JSON.stringify(matricula)
-    });
+    }).then(r => r.json())
+        .then(json => {
+            console.log(json);;
+        });
 }

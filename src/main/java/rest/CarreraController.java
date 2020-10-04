@@ -12,6 +12,10 @@ import repository.CarreraRepository;
 import repository.CarreraRepositoryImpl;
 import rest.response.CarrerasEstudiantesListResponse;
 
+/**
+ *
+ * Controller Carreras
+ */
 @Path("/carreras")
 public class CarreraController {
 
@@ -41,6 +45,11 @@ public class CarreraController {
 
   }
 
+  /**
+   * enpoint no obligatorio, esta incluido en la coleccion de Postman
+   * @param carrera
+   * @return carrera creada o error
+   */
   @POST
   @Path("/addCarrera")
   @Produces(MediaType.APPLICATION_JSON)

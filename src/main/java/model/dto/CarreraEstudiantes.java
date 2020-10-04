@@ -19,6 +19,10 @@ public class CarreraEstudiantes {
     return carrera;
   }
 
+  public Integer getInscriptos() {
+    return inscriptos;
+  }
+
   public void setCarrera(Carrera carrera) {
     this.carrera = carrera;
   }

@@ -1,9 +1,7 @@
 package rest.request;
 
 import model.Carrera;
-import model.Estudiante;
 
-import java.util.List;
 
 public class EstudiantesbyCiudadAndCarreraRequest {
     String ciudad;

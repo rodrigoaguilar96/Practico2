@@ -31,70 +31,63 @@ public class EstudianteCarreraRepositoryImpl extends GlobalRepository<Estudiante
   public EstudianteCarrera findById(Integer idCarrera, Integer idEstudiante) {
     Query query =
         entityManager.createQuery(
-            "select ec from EstudianteCarrera ec where ec.estudianteCarreraPK.idCarrera = :idCarrera AND ec.estudianteCarreraPK.idEstudiante = :idEstudiante");
+            "select ec from EstudianteCarrera ec where ec.matricula.idCarrera = :idCarrera AND ec.matricula.idEstudiante = :idEstudiante");
     query.setParameter("idCarrera", idCarrera);
     query.setParameter("idEstudiante", idEstudiante);
     return (EstudianteCarrera) query.getSingleResult();
   }
 
-  //TODO refactor
   @Override
   public List<ReporteCarrera> getReporteCarrera() {
     List<ReporteCarrera> reporteCarreras = new ArrayList<>();
     Query carrerasQuery = entityManager.createQuery("SELECT c from Carrera c");
     List<Carrera> carreras = carrerasQuery.getResultList();
+    String queryInscriptos =
+            "select YEAR(ec.fechaInscripcion), count(fechaInscripcion) "
+                    + "from EstudianteCarrera ec "
+                    + "where ec.idCarrera= ? "
+                    + "group by YEAR(ec.fechaInscripcion) "
+                    + "order by 1";
+    String queryEgresados =
+            "select YEAR(ec.fechaGraduacion), count(fechaGraduacion) "
+                    + "from EstudianteCarrera ec "
+                    + "where ec.idCarrera= ? "
+                    + "group by YEAR(ec.fechaGraduacion) "
+                    + "order by 1";
     for (Carrera carrera : carreras) {
       ReporteCarrera reporteCarrera = new ReporteCarrera(carrera);
-      Query query =
-          entityManager.createQuery(
-              "SELECT ec from EstudianteCarrera ec where ec.matricula.idCarrera = :id order by fechaInscripcion");
-      query.setParameter("id", carrera.getId());
+      Query query = entityManager.createNativeQuery(queryInscriptos);
+      query.setParameter(1, carrera.getId());
 
-      List<EstudianteCarrera> estudianteCarreras = query.getResultList();
       List<DatosReporteCarrera> datosReporteCarreraList = new ArrayList<>();
-      List<Integer> anioIngreso = new ArrayList<>();
-      List<Integer> anioEgreso = new ArrayList<>();
-      for (EstudianteCarrera e : estudianteCarreras) {
-        anioIngreso.add(e.getFechaInscripcion().getYear());
-        if (Objects.nonNull(e.getFechaGraduacion())) {
-          anioEgreso.add(e.getFechaGraduacion().getYear());
-        }
-      }
-      anioIngreso.sort(Integer::compareTo);
-      anioEgreso.sort(Integer::compareTo);
-
-      int i = 0;
-      while (i < anioIngreso.size()) {
+      List<Object[]> queryResultList = query.getResultList();
+      for (Object[] o : queryResultList) {
         DatosReporteCarrera datosReporteCarrera = new DatosReporteCarrera();
-        int contador = 1;
-        while ((i < anioIngreso.size() - 1)
-            && (Objects.equals(anioIngreso.get(i), anioIngreso.get(i + 1)))) {
-          contador++;
-          i++;
-        }
-        if (anioEgreso.contains(anioIngreso.get(i))) {
-          datosReporteCarrera.setEgresados(contarEgresos(anioEgreso, anioIngreso.get(i)));
-        }
-        datosReporteCarrera.setAño(anioIngreso.get(i));
-        datosReporteCarrera.setInscriptos(contador);
+        datosReporteCarrera.setAño((Integer) o[0]);
+        datosReporteCarrera.setInscriptos(Integer.valueOf(Math.toIntExact((Long) o[1])));
         datosReporteCarreraList.add(datosReporteCarrera);
-        i++;
       }
-      i = 0;
-      while (i < anioEgreso.size()) {
-        DatosReporteCarrera datosReporteCarrera = new DatosReporteCarrera();
-        int contador = 1;
-        while ((i < anioEgreso.size() - 1) && (anioEgreso.get(i) == anioEgreso.get(i + 1))) {
-          contador++;
-          i++;
-        }
-        if (anioIngreso.contains(anioEgreso.get(i))) {
-          i++;
-        } else {
-          datosReporteCarrera.setEgresados(contador);
-          datosReporteCarrera.setAño(anioEgreso.get(i));
-          datosReporteCarreraList.add(datosReporteCarrera);
-          i++;
+      query = entityManager.createNativeQuery(queryEgresados);
+      query.setParameter(1, carrera.getId());
+      List<Object[]> queryEgresosResultList = query.getResultList();
+      for (Object[] o : queryEgresosResultList) {
+        if (Objects.nonNull((Integer) o[0])) {
+          DatosReporteCarrera forCompere = new DatosReporteCarrera();
+          forCompere.setAño((Integer) o[0]);
+          if (datosReporteCarreraList.contains(forCompere)) {
+            for (int i = 0; i < datosReporteCarreraList.size(); i++) {
+              if (Objects.equals(datosReporteCarreraList.get(i).getAño(), (Integer) o[0])) {
+                datosReporteCarreraList
+                        .get(i)
+                        .setEgresados(Integer.valueOf(Math.toIntExact((Long) o[1])));
+              }
+            }
+          } else {
+            DatosReporteCarrera datosReporteCarrera = new DatosReporteCarrera();
+            datosReporteCarrera.setAño((Integer) o[0]);
+            datosReporteCarrera.setEgresados(Integer.valueOf(Math.toIntExact((Long) o[1])));
+            datosReporteCarreraList.add(datosReporteCarrera);
+          }
         }
       }
       reporteCarrera.setDatosReporteCarreras(datosReporteCarreraList);
@@ -104,13 +97,4 @@ public class EstudianteCarreraRepositoryImpl extends GlobalRepository<Estudiante
     return reporteCarreras;
   }
 
-  private Integer contarEgresos(List<Integer> integers, Integer itemToCheck) {
-    int count = 0;
-    for (Integer i : integers) {
-      if (i.equals(itemToCheck)) {
-        count++;
-      }
-    }
-    return count;
-  }
 }

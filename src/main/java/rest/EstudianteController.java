@@ -21,6 +21,9 @@ import rest.request.EstudiantesbyCiudadAndCarreraRequest;
 import rest.request.MatricularEstudianteRequest;
 import rest.response.EstudianteListResponse;
 
+/**
+ * Estudiantes Controller
+ */
 @Path("/estudiantes")
 public class EstudianteController {
 
@@ -155,10 +158,10 @@ public class EstudianteController {
   }
 
   /**
-   *
+   * Punto 2g
    * @param ciudad
    * @param carrera
-   * @return
+   * @return Estudiantes por carrera y ciudad
    */
   @GET
   @Path("/estudianteByCarreraAndCiudad")

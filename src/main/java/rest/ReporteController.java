@@ -8,14 +8,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.dto.ReporteCarrera;
-import repository.EstudianteCarreraRepository;
-import repository.EstudianteCarreraRepositoryImpl;
 
+
+/**
+ * Reporte Controller
+ */
 @Path("/reporte")
 public class ReporteController {
   /**
    * Punto 2h;
-   * @return
+   * @return Reporte
    */
   @GET
   @Path("/reporteGraduados")

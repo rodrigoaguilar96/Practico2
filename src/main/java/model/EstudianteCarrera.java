@@ -45,7 +45,7 @@ public class EstudianteCarrera {
         + '}';
   }
 
-  public Matricula getEstudianteCarreraPK() {
+  public Matricula getMatricula() {
     return matricula;
   }
 

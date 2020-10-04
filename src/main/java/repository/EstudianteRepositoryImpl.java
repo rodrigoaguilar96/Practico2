@@ -43,7 +43,7 @@ public class EstudianteRepositoryImpl extends GlobalRepository<Estudiante>
                 + "from Estudiante e "
                 + "JOIN EstudianteCarrera ec "
                 + "JOIN Carrera c "
-                + "where ec.estudianteCarreraPK.idCarrera = :idCarrera AND e.ciudad like :ciudad");
+                + "where ec.matricula.idCarrera = :idCarrera AND e.ciudad like :ciudad");
     query.setParameter("idCarrera", carrera.getId());
     query.setParameter("ciudad", ciudad);
     return (List<Estudiante>) query.getResultList();
