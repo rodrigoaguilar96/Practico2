@@ -10,7 +10,7 @@ import model.dto.ReporteCarrera;
 public interface EstudianteCarreraRepository {
 
   /**
-   * matricular un estudiante en una carrera
+   * matricular un estudiante en una carrera.
    *
    * @param carrera
    * @param estudiante
@@ -19,14 +19,14 @@ public interface EstudianteCarreraRepository {
   void matricular(Carrera carrera, Estudiante estudiante, LocalDate fechaInscripcion);
 
   /**
-   * guarda en la base de datos un objeto EstudianteCarrera
+   * guarda en la base de datos un objeto EstudianteCarrera.
    *
    * @param estudianteCarrera
    */
   void save(EstudianteCarrera estudianteCarrera);
 
   /**
-   * Obtiene un estudianteCarrera por ID
+   * Obtiene un estudianteCarrera por ID.
    *
    * @param idCarrera
    * @param idEstudiante
@@ -35,8 +35,8 @@ public interface EstudianteCarreraRepository {
   EstudianteCarrera findById(Integer idCarrera, Integer idEstudiante);
 
   /**
-   * Metodo que crea el reporte para el punto 3
-   *
+   * Metodo que crea el reporte para el punto 3.
+   * Se realizo un refactor para bajar el costo de metodo.
    * @return lista de reportes
    */
   List<ReporteCarrera> getReporteCarrera();

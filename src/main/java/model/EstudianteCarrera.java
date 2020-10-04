@@ -7,8 +7,7 @@ import javax.persistence.Entity;
 @Entity
 public class EstudianteCarrera {
 
-  @EmbeddedId
-  Matricula matricula;
+  @EmbeddedId Matricula matricula;
 
   LocalDate fechaInscripcion;
 

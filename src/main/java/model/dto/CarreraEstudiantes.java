@@ -2,9 +2,7 @@ package model.dto;
 
 import model.Carrera;
 
-/**
-* Esta clase es utilizada para el punto 2f
- */
+/** Esta clase es utilizada para el punto 2f */
 public class CarreraEstudiantes {
   Carrera carrera;
 
@@ -30,6 +28,4 @@ public class CarreraEstudiantes {
   public void setInscriptos(Integer inscriptos) {
     this.inscriptos = inscriptos;
   }
-
-
 }

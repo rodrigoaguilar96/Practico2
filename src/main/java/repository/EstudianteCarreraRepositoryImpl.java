@@ -43,17 +43,17 @@ public class EstudianteCarreraRepositoryImpl extends GlobalRepository<Estudiante
     Query carrerasQuery = entityManager.createQuery("SELECT c from Carrera c");
     List<Carrera> carreras = carrerasQuery.getResultList();
     String queryInscriptos =
-            "select YEAR(ec.fechaInscripcion), count(fechaInscripcion) "
-                    + "from EstudianteCarrera ec "
-                    + "where ec.idCarrera= ? "
-                    + "group by YEAR(ec.fechaInscripcion) "
-                    + "order by 1";
+        "select YEAR(ec.fechaInscripcion), count(fechaInscripcion) "
+            + "from EstudianteCarrera ec "
+            + "where ec.idCarrera= ? "
+            + "group by YEAR(ec.fechaInscripcion) "
+            + "order by 1";
     String queryEgresados =
-            "select YEAR(ec.fechaGraduacion), count(fechaGraduacion) "
-                    + "from EstudianteCarrera ec "
-                    + "where ec.idCarrera= ? "
-                    + "group by YEAR(ec.fechaGraduacion) "
-                    + "order by 1";
+        "select YEAR(ec.fechaGraduacion), count(fechaGraduacion) "
+            + "from EstudianteCarrera ec "
+            + "where ec.idCarrera= ? "
+            + "group by YEAR(ec.fechaGraduacion) "
+            + "order by 1";
     for (Carrera carrera : carreras) {
       ReporteCarrera reporteCarrera = new ReporteCarrera(carrera);
       Query query = entityManager.createNativeQuery(queryInscriptos);
@@ -78,8 +78,8 @@ public class EstudianteCarreraRepositoryImpl extends GlobalRepository<Estudiante
             for (int i = 0; i < datosReporteCarreraList.size(); i++) {
               if (Objects.equals(datosReporteCarreraList.get(i).getAño(), (Integer) o[0])) {
                 datosReporteCarreraList
-                        .get(i)
-                        .setEgresados(Integer.valueOf(Math.toIntExact((Long) o[1])));
+                    .get(i)
+                    .setEgresados(Integer.valueOf(Math.toIntExact((Long) o[1])));
               }
             }
           } else {
@@ -96,5 +96,4 @@ public class EstudianteCarreraRepositoryImpl extends GlobalRepository<Estudiante
 
     return reporteCarreras;
   }
-
 }

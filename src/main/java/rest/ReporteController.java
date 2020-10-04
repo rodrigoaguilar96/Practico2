@@ -9,14 +9,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.dto.ReporteCarrera;
 
-
-/**
- * Reporte Controller
- */
+/** Reporte Controller */
 @Path("/reporte")
 public class ReporteController {
   /**
    * Punto 2h;
+   *
    * @return Reporte
    */
   @GET
@@ -25,19 +23,13 @@ public class ReporteController {
   public Response getReporte() {
     try {
 
-      List<ReporteCarrera> reporteCarreras = LectorCicloDeVida.estudianteCarreraRepository.getReporteCarrera();
+      List<ReporteCarrera> reporteCarreras =
+          LectorCicloDeVida.estudianteCarreraRepository.getReporteCarrera();
       Collections.sort(reporteCarreras);
-      return Response
-          .status(Response.Status.OK)
-          .entity(reporteCarreras)
-          .build();
+      return Response.status(Response.Status.OK).entity(reporteCarreras).build();
     } catch (Exception e) {
       String error = "Error al Obtener Reporte.";
-      return Response
-          .serverError()
-          .entity(error)
-          .build();
+      return Response.serverError().entity(error).build();
     }
   }
-
 }

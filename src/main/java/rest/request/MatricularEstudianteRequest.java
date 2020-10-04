@@ -1,7 +1,5 @@
 package rest.request;
 
-import model.Carrera;
-import model.Estudiante;
 
 public class MatricularEstudianteRequest {
   Integer estudiante;

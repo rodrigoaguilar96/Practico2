@@ -2,9 +2,7 @@ package model.dto;
 
 import java.util.Objects;
 
-/**
-* Clase utilizada para los reportes del punto 3.
- */
+/** Clase utilizada para los reportes del punto 3. */
 public class DatosReporteCarrera implements Comparable<DatosReporteCarrera> {
   Integer inscriptos;
   Integer egresados;
@@ -48,10 +46,9 @@ public class DatosReporteCarrera implements Comparable<DatosReporteCarrera> {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    DatosReporteCarrera temp = (DatosReporteCarrera)o;
-    if (Objects.equals(this.getAño(),temp.getAño())) {
+    DatosReporteCarrera temp = (DatosReporteCarrera) o;
+    if (Objects.equals(this.getAño(), temp.getAño())) {
       return true;
-    }
-    else return false;
+    } else return false;
   }
 }

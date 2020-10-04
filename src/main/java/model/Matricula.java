@@ -20,12 +20,7 @@ public class Matricula implements Serializable {
 
   @Override
   public String toString() {
-    return "Matricula{"
-        + "idCarrera="
-        + idCarrera
-        + ", idEstudiante="
-        + idEstudiante
-        + '}';
+    return "Matricula{" + "idCarrera=" + idCarrera + ", idEstudiante=" + idEstudiante + '}';
   }
 
   @Override

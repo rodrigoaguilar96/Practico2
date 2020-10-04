@@ -12,13 +12,9 @@ import repository.CarreraRepository;
 import repository.CarreraRepositoryImpl;
 import rest.response.CarrerasEstudiantesListResponse;
 
-/**
- *
- * Controller Carreras
- */
+/** Controller Carreras */
 @Path("/carreras")
 public class CarreraController {
-
 
   /**
    * Punto 2f.
@@ -30,23 +26,18 @@ public class CarreraController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getListaCarrera() {
     try {
-      List<CarreraEstudiantes> carreraList = LectorCicloDeVida.carreraRepository.findAllSortByInscriptos();
-      return Response
-          .status(Response.Status.OK)
-          .entity(carreraList)
-          .build();
+      List<CarreraEstudiantes> carreraList =
+          LectorCicloDeVida.carreraRepository.findAllSortByInscriptos();
+      return Response.status(Response.Status.OK).entity(carreraList).build();
     } catch (Exception e) {
       String error = "Error al Obtener lista de Carreras.";
-      return Response
-          .serverError()
-          .entity(error)
-          .build();
+      return Response.serverError().entity(error).build();
     }
-
   }
 
   /**
    * enpoint no obligatorio, esta incluido en la coleccion de Postman
+   *
    * @param carrera
    * @return carrera creada o error
    */
@@ -57,18 +48,10 @@ public class CarreraController {
   public Response saveEstudiante(Carrera carrera) {
     try {
       LectorCicloDeVida.carreraRepository.save(carrera);
-      return Response
-              .status(Response.Status.OK)
-              .entity(carrera)
-              .build();
+      return Response.status(Response.Status.OK).entity(carrera).build();
     } catch (Exception e) {
       String error = "Error al insertar Carrera";
-      return Response
-              .serverError()
-              .entity(error)
-              .build();
+      return Response.serverError().entity(error).build();
     }
   }
-
-
 }

@@ -21,9 +21,7 @@ import rest.request.EstudiantesbyCiudadAndCarreraRequest;
 import rest.request.MatricularEstudianteRequest;
 import rest.response.EstudianteListResponse;
 
-/**
- * Estudiantes Controller
- */
+/** Estudiantes Controller */
 @Path("/estudiantes")
 public class EstudianteController {
 
@@ -40,16 +38,10 @@ public class EstudianteController {
   public Response saveEstudiante(Estudiante estudiante) {
     try {
       LectorCicloDeVida.estudianteRepository.save(estudiante);
-      return Response
-          .status(Response.Status.OK)
-          .entity(estudiante)
-          .build();
+      return Response.status(Response.Status.OK).entity(estudiante).build();
     } catch (Exception e) {
       String error = "Error al insertar Estudiante";
-      return Response
-          .serverError()
-          .entity(error)
-          .build();
+      return Response.serverError().entity(error).build();
     }
   }
 
@@ -58,7 +50,7 @@ public class EstudianteController {
    *
    * @param matricularEstudianteRequest
    * @return Estudiante a matricular y la carrera cargado con status 200 o Server error y un
-   * mensaje.
+   *     mensaje.
    */
   @POST
   @Path("/matricularEstudiante")
@@ -66,20 +58,17 @@ public class EstudianteController {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response matricularEstudiante(MatricularEstudianteRequest matricularEstudianteRequest) {
     try {
-      Estudiante estudiante = LectorCicloDeVida.estudianteRepository.findByLibretaUniversitaria(matricularEstudianteRequest.getEstudiante());
-      Carrera carrera = LectorCicloDeVida.carreraRepository.findById(matricularEstudianteRequest.getCarrera());
-      LectorCicloDeVida.estudianteCarreraRepository.matricular(carrera,
-              estudiante, LocalDate.now());
-      return Response
-          .status(Response.Status.OK)
-          .entity(matricularEstudianteRequest)
-          .build();
+      Estudiante estudiante =
+          LectorCicloDeVida.estudianteRepository.findByLibretaUniversitaria(
+              matricularEstudianteRequest.getEstudiante());
+      Carrera carrera =
+          LectorCicloDeVida.carreraRepository.findById(matricularEstudianteRequest.getCarrera());
+      LectorCicloDeVida.estudianteCarreraRepository.matricular(
+          carrera, estudiante, LocalDate.now());
+      return Response.status(Response.Status.OK).entity(matricularEstudianteRequest).build();
     } catch (Exception e) {
       String error = "Error al Matricular un estudiante";
-      return Response
-          .serverError()
-          .entity(error)
-          .build();
+      return Response.serverError().entity(error).build();
     }
   }
 
@@ -93,17 +82,12 @@ public class EstudianteController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getListaEstudiantes() {
     try {
-      List<Estudiante> estudianteListResponse = LectorCicloDeVida.estudianteRepository.findAllSortByNombre();
-      return Response
-          .status(Response.Status.OK)
-          .entity(estudianteListResponse)
-          .build();
+      List<Estudiante> estudianteListResponse =
+          LectorCicloDeVida.estudianteRepository.findAllSortByNombre();
+      return Response.status(Response.Status.OK).entity(estudianteListResponse).build();
     } catch (Exception e) {
       String error = "Error al Obtener lista de estudiantes ordenada por nombre.";
-      return Response
-          .serverError()
-          .entity(error)
-          .build();
+      return Response.serverError().entity(error).build();
     }
   }
 
@@ -118,17 +102,12 @@ public class EstudianteController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEstudiantebyLibreta(@QueryParam("libreta") Integer libreta) {
     try {
-      Estudiante estudiante = LectorCicloDeVida.estudianteRepository.findByLibretaUniversitaria(libreta);
-      return Response
-          .status(Response.Status.OK)
-          .entity(estudiante)
-          .build();
+      Estudiante estudiante =
+          LectorCicloDeVida.estudianteRepository.findByLibretaUniversitaria(libreta);
+      return Response.status(Response.Status.OK).entity(estudiante).build();
     } catch (Exception e) {
       String error = "Error al Obtener Estudiante por la Libreta Universitaria";
-      return Response
-          .serverError()
-          .entity(error)
-          .build();
+      return Response.serverError().entity(error).build();
     }
   }
 
@@ -143,22 +122,18 @@ public class EstudianteController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEstudiantebyGenero(@QueryParam("genero") String genero) {
     try {
-      List<Estudiante> estudiantesByGenero = LectorCicloDeVida.estudianteRepository.findByGenero(genero);
-      return Response
-          .status(Response.Status.OK)
-          .entity(estudiantesByGenero)
-          .build();
+      List<Estudiante> estudiantesByGenero =
+          LectorCicloDeVida.estudianteRepository.findByGenero(genero);
+      return Response.status(Response.Status.OK).entity(estudiantesByGenero).build();
     } catch (Exception e) {
       String error = "Error al Obtener la lista de estudiantes por genero.";
-      return Response
-          .serverError()
-          .entity(error)
-          .build();
+      return Response.serverError().entity(error).build();
     }
   }
 
   /**
    * Punto 2g
+   *
    * @param ciudad
    * @param carrera
    * @return Estudiantes por carrera y ciudad
@@ -167,22 +142,16 @@ public class EstudianteController {
   @Path("/estudianteByCarreraAndCiudad")
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response getEstudiantebyCiudad(@QueryParam("ciudad") String ciudad,@QueryParam("carrera") Integer carrera) {
+  public Response getEstudiantebyCiudad(
+      @QueryParam("ciudad") String ciudad, @QueryParam("carrera") Integer carrera) {
     try {
       Carrera carrera1 = LectorCicloDeVida.carreraRepository.findById(carrera);
-      List<Estudiante> estudiantesByCiudad = LectorCicloDeVida.estudianteRepository.findAllByCarreraAndCiudad(carrera1
-              ,ciudad);
-      return Response
-          .status(Response.Status.OK)
-          .entity(estudiantesByCiudad)
-          .build();
+      List<Estudiante> estudiantesByCiudad =
+          LectorCicloDeVida.estudianteRepository.findAllByCarreraAndCiudad(carrera1, ciudad);
+      return Response.status(Response.Status.OK).entity(estudiantesByCiudad).build();
     } catch (Exception e) {
       String error = "Error al Obtener la lista de estudiantes por ciudad.";
-      return Response
-          .serverError()
-          .entity(error)
-          .build();
+      return Response.serverError().entity(error).build();
     }
   }
-
 }
